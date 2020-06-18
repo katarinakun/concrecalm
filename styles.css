@@ -1,41 +1,55 @@
 ﻿body {
-    text-align: center;
-    margin: 2% 5% 2% 30%;
+    text-align: left;
+    margin: 2% 5% 2% 5%;
     color: #9c96ad;
     font-size: 20px;
     background-color: #4a4d7e
 }
 
+textarea {
+    color: #f0e6e5;
+}
+#inputFileNameToSaveAs {
+    background-color: #eeede0;
+}
 #editor {
-    width: 100%;
-    margin-left: 50%;
-    background-color: #262744
+    width:100%;
+    margin-right: 2%;
+    background-color: #333342;
+    padding: 20px;
+	        min-height:200px;
 }
 
 #controls {
     margin-left: 0px;
 }
 
-a.button {
+input[type="file"] {
+    display: none;
+}
+
+.button {
     width: 2%;
     display: inline-block;
     background: #c69ea2;
     border-radius: 12px;
     border: 1px solid #4a4d7e;
-    color: #decdcb;
+    color: #f0e6e5;
+    padding: 12px 30px 12px 18px;
     text-decoration: none;
     text-align: center;
-    padding: 12px 24px 12px 24px;
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
     font-family: 'Caviar Dreams';
     font-size: larger
 }
 
-    a.button:hover {
+.load {padding: 12px 12px 12px 12px;}
+
+    .button:hover {
         background: rgba(120, 160, 120, 1);
         color: white;
     }
 
-    a.button:active {
+    .button:active {
         background: rgba(80, 120, 80, 1);
     }

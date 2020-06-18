@@ -1,63 +1,67 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<title>Текстовый редактор</title>
+	<title>concrecalm</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" ; href="styles.css" />
 </head>
 <body>
-	<div id="editor" contenteditable="true" class="editorSheet">
-	</div>
 	<div id="controls">
-		<p>
-			<a href="#" ;" class="button">S</a>
-		</p>
+		<button class="button save"; onclick="saveTextAsFile()">S</button>
+		<label class = "button load">
+		<input type="file" id="load" accept=".txt" />L
+		</label>
+		<button class="button read"; onclick="loadFileAsText()">R</button>
 	</div>
-	<input type="file" id="file">
-	<button onclick="readFile(document.getElementById('file'))">Read!</button>
+	
 	<div id="out"></div>
-	<script>
-		if (localStorage.getItem('text_in_editor') !== null) {
-			document.getElementById('editor').innerHTML = localStorage.getItem('text_in_editor');
-		}
-		document.addEventListener('keydown', function (e) {
-			localStorage.setItem('text_in_editor', document.getElementById('editor').innerHTML);
-		});
-	</script>
-	<script>
-		window.onload = init;
 
-		function init() {
-			var button = document.getElementById("addButton")
-			button.onclick = handleButtonClick;
-		}
+	<textarea id="editor" cols="80" rows="25" class="editorSheet">
+	</textarea>
 
-		function handleButtonClick() {
+	<td>Filename to Save As:</td>
+        <td><input id="inputFileNameToSaveAs"></input></td>
 
-			fs.root.getFile('log.txt', { create: true }, function (fileEntry) {
+	<script type="text/javascript">
 
-				fileEntry.createWriter(function (fileWriter) {
+		function saveTextAsFile()
+	{
+    var textToSave = document.getElementById("editor").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+	}
 
-					fileWriter.onwriteend = function (e) {
-						console.log('Write completed.');
-					};
+	  
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
 
-					fileWriter.onerror = function (e) {
-						console.log('Write failed: ' + e.toString());
-					};
-
-					var bb = new BlobBuilder();
-					bb.append(localStorage);
-					fileWriter.write(bb.getBlob('text/plain'));
-
-				}, errorHandler);
-
-			}, errorHandler);
-
-		}
-
+function loadFileAsText()
+{
+    var fileToLoad = document.getElementById("load").files[0];
+ 
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) 
+    {
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        document.getElementById("editor").value = textFromFileLoaded;
+    };
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
 
 	</script>
 	<script src="scripts/JavaScript.js"></script>

@@ -58,3 +58,8 @@ function readFile(object) {
     }
     reader.readAsText(file)
 }
+
+setInterval(function() {
+  // fuction that is saving the innerHTML of the div
+  localStorage["text"] = document.getElementById("editor").innerHTML; // content div
+}, 1000);
