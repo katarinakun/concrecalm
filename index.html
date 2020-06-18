@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Текстовый редактор</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" ; href="styles.css" />
+</head>
+<body>
+	<div id="editor" contenteditable="true" class="editorSheet">
+	</div>
+	<div id="controls">
+		<p>
+			<a href="#" ;" class="button">S</a>
+		</p>
+	</div>
+	<input type="file" id="file">
+	<button onclick="readFile(document.getElementById('file'))">Read!</button>
+	<div id="out"></div>
+	<script>
+		if (localStorage.getItem('text_in_editor') !== null) {
+			document.getElementById('editor').innerHTML = localStorage.getItem('text_in_editor');
+		}
+		document.addEventListener('keydown', function (e) {
+			localStorage.setItem('text_in_editor', document.getElementById('editor').innerHTML);
+		});
+	</script>
+	<script>
+		window.onload = init;
+
+		function init() {
+			var button = document.getElementById("addButton")
+			button.onclick = handleButtonClick;
+		}
+
+		function handleButtonClick() {
+
+			fs.root.getFile('log.txt', { create: true }, function (fileEntry) {
+
+				fileEntry.createWriter(function (fileWriter) {
+
+					fileWriter.onwriteend = function (e) {
+						console.log('Write completed.');
+					};
+
+					fileWriter.onerror = function (e) {
+						console.log('Write failed: ' + e.toString());
+					};
+
+					var bb = new BlobBuilder();
+					bb.append(localStorage);
+					fileWriter.write(bb.getBlob('text/plain'));
+
+				}, errorHandler);
+
+			}, errorHandler);
+
+		}
+
+
+	</script>
+	<script src="scripts/JavaScript.js"></script>
+</body>
+</html>

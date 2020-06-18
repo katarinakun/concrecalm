@@ -1,0 +1,41 @@
+﻿body {
+    text-align: center;
+    margin: 2% 5% 2% 30%;
+    color: #9c96ad;
+    font-size: 20px;
+    background-color: #4a4d7e
+}
+
+#editor {
+    width: 100%;
+    margin-left: 1%;
+    background-color: #262744
+}
+
+#controls {
+    margin-left: 0px;
+}
+
+a.button {
+    width: 2%;
+    display: inline-block;
+    background: #c69ea2;
+    border-radius: 12px;
+    border: 1px solid #4a4d7e;
+    color: #decdcb;
+    text-decoration: none;
+    text-align: center;
+    padding: 12px 24px 12px 24px;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
+    font-family: 'Caviar Dreams';
+    font-size: larger
+}
+
+    a.button:hover {
+        background: rgba(120, 160, 120, 1);
+        color: white;
+    }
+
+    a.button:active {
+        background: rgba(80, 120, 80, 1);
+    }
