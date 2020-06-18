@@ -26,6 +26,10 @@
 
 	<script type="text/javascript">
 
+	function eraseText() {
+		document.getElementById("editor").value = "";
+	}
+
 		function saveTextAsFile()
 	{
     var textToSave = document.getElementById("editor").value;
@@ -62,6 +66,34 @@ function loadFileAsText()
     };
     fileReader.readAsText(fileToLoad, "UTF-8");
 }
+
+var timeoutID;
+ 
+function setup() {
+    this.addEventListener("keypress", resetTimer, false);
+    startTimer();
+}
+setup();
+ 
+function startTimer() {
+    // wait 2 seconds before calling goInactive
+    timeoutID = window.setTimeout(goInactive, 10000);
+}
+ 
+function resetTimer(e) {
+    window.clearTimeout(timeoutID);
+ 
+    goActive();
+}
+ 
+function goInactive() {
+    eraseText();
+}
+ 
+function goActive() {
+    startTimer();
+}
+
 
 	</script>
 	<script src="scripts/JavaScript.js"></script>
