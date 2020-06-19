@@ -12,8 +12,9 @@
 		<button class="button save"; onclick="saveTextAsFile()">S</button>
 		<label class = "button load">
 		<input type="file" id="load" accept=".txt" />L
-		</label>
-		<button class="button read"; onclick="loadFileAsText()">R</button>
+        </label>
+        <button class="button read"; onclick="loadFileAsText()">R</button>
+        <button id = "sad"; class ="button sadist"; onclick="setup()">SADISTICMODE</button>
 	</div>
 	
 	<div id="out"></div>
@@ -70,14 +71,15 @@ function loadFileAsText()
 var timeoutID;
  
 function setup() {
+    document.getElementById("sad").style.color = "yellow";
     this.addEventListener("keypress", resetTimer, false);
     startTimer();
 }
-setup();
+
  
 function startTimer() {
     // wait 2 seconds before calling goInactive
-    timeoutID = window.setTimeout(goInactive, 10000);
+    timeoutID = window.setTimeout(goInactive, 3000);
 }
  
 function resetTimer(e) {

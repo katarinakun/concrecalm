@@ -53,3 +53,11 @@ input[type="file"] {
     .button:active {
         background: rgba(80, 120, 80, 1);
     }
+
+.sadist {
+    padding: 12px 200px 12px 24px;
+}
+
+.sadist:active {
+    background: rgba(13, 88, 59, 0.651);
+}
